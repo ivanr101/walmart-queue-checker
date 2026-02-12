@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            width: 320px;
+            font-family: 'Whitney', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #36393f;
+            color: #dcddde;
+            padding: 16px;
+            margin: 0;
+        }
+
+        h3 {
+            color: #fff;
+            margin-top: 0;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            font-weight: 700;
+        }
+
+        .discord-btn {
+            display: block;
+            background-color: #5865F2;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 16px;
+            transition: background-color 0.2s;
+            font-size: 14px;
+        }
+
+        .discord-btn:hover {
+            background-color: #4752C4;
+        }
+
+        .data-item {
+            background-color: #2f3136;
+            margin-bottom: 8px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+
+        .label {
+            font-weight: 700;
+            color: #b9bbbe;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .value {
+            font-size: 14px;
+            color: #fff;
+            word-break: break-word;
+        }
+
+        .unlikely {
+            color: #ed4245;
+            /* Red */
+            font-weight: bold;
+        }
+
+        .likely {
+            color: #3ba55c;
+            /* Green */
+            font-weight: bold;
+        }
+
+        #display p {
+            color: #b9bbbe;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="https://discord.com/invite/7n4VEx9jaU" target="_blank" class="discord-btn">
+        Join Pokemon Restock Discord
+    </a>
+    <h3>Queue Details</h3>
+    <div id="display">
+        <p>Please open a Walmart Queue page.</p>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

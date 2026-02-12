@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "Walmart Queue Decoder",
+    "version": "1.0",
+    "description": "Decodes Walmart Queue-it data from the URL.",
+    "permissions": [
+        "activeTab"
+    ],
+    "action": {
+        "default_popup": "popup.html"
+    },
+    "host_permissions": [
+        "https://www.walmart.com/*"
+    ]
+}
