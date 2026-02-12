@@ -13,11 +13,14 @@ A Chrome extension designed to decode Walmart Queue-it data directly from the UR
 
 To install this extension in Google Chrome:
 
-1.  **Download or Clone** this repository to your computer.
+1.  **Download and Prepare the Files**:
+    *   **Option A (Git)**: Clone the repository using `git clone`.
+    *   **Option B (ZIP)**: Click the green **Code** button and select **Download ZIP**. Once downloaded, **extract/unzip the file** to a folder on your computer.
+        > **Note**: You cannot verify the extension directly from the `.zip` file. You *must* extract it to a folder first.
 2.  Open Chrome and navigate to `chrome://extensions/`.
 3.  Enable **Developer mode** by toggling the switch in the top-right corner.
 4.  Click the **Load unpacked** button.
-5.  Select the directory where you downloaded this extension (the folder containing `manifest.json`).
+5.  Select the folder where you extracted the files (this folder should contain the `manifest.json` file).
 6.  The extension should now appear in your list and be ready to use!
 
 ## Usage
