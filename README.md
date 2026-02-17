@@ -7,6 +7,7 @@ A Chrome extension designed to decode Walmart Queue-it data directly from the UR
 
 - **Decodes Queue Parameters**: Extracts ticket number, expected turn time, and admission likelihood.
 - **Auto-Refresh**: Set a specific time for the page to automatically refresh, ensuring you're ready for the drop.
+    > **Note**: This affects every single open tab. It is highly recommended to only have necessary tabs open when using this feature.
 - **Discord Theme**: Sleek dark interface matching Discord's aesthetic.
 - **Quick Links**: Direct access to the Pokemon Notify Discord community.
 
