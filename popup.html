@@ -83,9 +83,48 @@
     <a href="https://discord.com/invite/7n4VEx9jaU" target="_blank" class="discord-btn">
         Join Pokemon Restock Discord
     </a>
+
+
+
     <h3>Queue Details</h3>
     <div id="display">
         <p>Please open a Walmart Queue page.</p>
+    </div>
+
+    <div class="data-item">
+        <div class="label">Auto Refresh</div>
+        <div style="display: flex; gap: 4px; align-items: center; margin-bottom: 8px;">
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 10px; color: #b9bbbe; margin-bottom: 2px;">Hour</label>
+                <input type="number" id="refresh-hour" min="1" max="12" placeholder="12"
+                    style="padding: 4px; border-radius: 4px; border: 1px solid #4f545c; background: #40444b; color: white; text-align: center;">
+            </div>
+            <span style="color: #b9bbbe; padding-top: 14px;">:</span>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 10px; color: #b9bbbe; margin-bottom: 2px;">Min</label>
+                <input type="number" id="refresh-minute" min="0" max="59" placeholder="00"
+                    style="padding: 4px; border-radius: 4px; border: 1px solid #4f545c; background: #40444b; color: white; text-align: center;">
+            </div>
+            <span style="color: #b9bbbe; padding-top: 14px;">:</span>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 10px; color: #b9bbbe; margin-bottom: 2px;">Sec</label>
+                <input type="number" id="refresh-second" min="0" max="59" placeholder="00"
+                    style="padding: 4px; border-radius: 4px; border: 1px solid #4f545c; background: #40444b; color: white; text-align: center;">
+            </div>
+            <div style="flex: 1; display: flex; flex-direction: column;">
+                <label style="font-size: 10px; color: #b9bbbe; margin-bottom: 2px;">AM/PM</label>
+                <select id="refresh-ampm"
+                    style="padding: 4px; border-radius: 4px; border: 1px solid #4f545c; background: #40444b; color: white;">
+                    <option value="AM">AM</option>
+                    <option value="PM" selected>PM</option>
+                </select>
+            </div>
+        </div>
+        <div style="display: flex; gap: 8px;">
+            <button id="clear-refresh"
+                style="flex: 1; padding: 6px; background: #ed4245; border: none; border-radius: 4px; color: white; cursor: pointer;">Clear</button>
+        </div>
+        <div id="refresh-status" style="margin-top: 8px; font-size: 12px; color: #b9bbbe;"></div>
     </div>
     <script src="popup.js"></script>
 </body>
