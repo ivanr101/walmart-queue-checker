@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       hourInput.value = '';
       minuteInput.value = '';
       secondInput.value = '';
-      ampmInput.value = 'PM';
+      ampmInput.value = '';
       return;
     }
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let s = parseInt(secondInput.value) || 0;
     const ampm = ampmInput.value;
 
-    if (isNaN(h) || isNaN(m)) return; // Don't save if incomplete
+    if (isNaN(h) || isNaN(m) || !ampm) return; // Don't save if incomplete
 
     // Convert to 24h
     if (ampm === 'PM' && h < 12) h += 12;
