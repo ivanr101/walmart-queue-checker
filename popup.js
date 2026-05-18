@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const hourInput = document.getElementById('refresh-hour');
   const minuteInput = document.getElementById('refresh-minute');
   const secondInput = document.getElementById('refresh-second');
+  const msInput = document.getElementById('refresh-ms');
   const ampmInput = document.getElementById('refresh-ampm');
   const clearBtn = document.getElementById('clear-refresh');
   const statusDiv = document.getElementById('refresh-status');
@@ -16,13 +17,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const hours = parts[0];
     const minutes = parts[1];
     const seconds = parts[2] || '00';
+    const milliseconds = parts[3] || '000';
 
     const date = new Date();
     date.setHours(hours);
     date.setMinutes(minutes);
     date.setSeconds(seconds);
 
-    return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+    return date.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' }) + `.${milliseconds}`;
   }
 
   function updateUI(time) {
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       hourInput.value = '';
       minuteInput.value = '';
       secondInput.value = '';
+      msInput.value = '';
       ampmInput.value = '';
       return;
     }
@@ -38,6 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let hours = parseInt(parts[0]);
     const minutes = parts[1];
     const seconds = parts[2] || '00';
+    const milliseconds = parts[3] || '000';
 
     const ampm = hours >= 12 ? 'PM' : 'AM';
     hours = hours % 12;
@@ -46,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     hourInput.value = hours;
     minuteInput.value = minutes;
     secondInput.value = seconds;
+    msInput.value = milliseconds;
     ampmInput.value = ampm;
   }
 
@@ -61,7 +66,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function renderStatus() {
-    const nowStr = new Date().toLocaleTimeString();
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString();
+    const msStr = now.getMilliseconds().toString().padStart(3, '0');
+    const nowStr = timeStr.match(/ (AM|PM)$/i) ? timeStr.replace(/ (AM|PM)$/i, `.${msStr} $1`) : `${timeStr}.${msStr}`;
+
     if (currentScheduledTime) {
       statusDiv.innerHTML = `Refresh set for <span style="color: #3ba55c; font-weight: bold;">${formatTime(currentScheduledTime)}</span><br><span style="color: #b9bbbe; font-size: 11px;">Current: ${nowStr}</span>`;
     } else {
@@ -70,14 +79,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   }
 
-  // Update clock every second
-  setInterval(renderStatus, 1000);
+  // Update clock frequently for ms
+  setInterval(renderStatus, 50);
 
   // Auto-save logic
   function saveTime() {
     let h = parseInt(hourInput.value);
     let m = parseInt(minuteInput.value);
     let s = parseInt(secondInput.value) || 0;
+    let ms = parseInt(msInput.value) || 0;
     const ampm = ampmInput.value;
 
     if (isNaN(h) || isNaN(m) || !ampm) return; // Don't save if incomplete
@@ -90,8 +100,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     const hStr = h.toString().padStart(2, '0');
     const mStr = m.toString().padStart(2, '0');
     const sStr = s.toString().padStart(2, '0');
+    const msStr = ms.toString().padStart(3, '0');
 
-    const time = `${hStr}:${mStr}:${sStr}`;
+    const time = `${hStr}:${mStr}:${sStr}:${msStr}`;
 
     chrome.storage.local.set({ refreshTime: time }, () => {
       // updateStatus only for text, avoiding input overwrite for smoother UX
@@ -99,7 +110,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  [hourInput, minuteInput, secondInput, ampmInput].forEach(el => {
+  [hourInput, minuteInput, secondInput, msInput, ampmInput].forEach(el => {
     el.addEventListener('change', saveTime);
     el.addEventListener('keyup', saveTime); // Also save on typing
   });

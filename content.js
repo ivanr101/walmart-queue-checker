@@ -34,10 +34,11 @@ function scheduleRefresh(timeString) {
     const hours = parts[0];
     const minutes = parts[1];
     const seconds = parts[2] || 0;
+    const milliseconds = parts[3] || 0;
 
     // Create a date object for the scheduled time on the current day
     const refreshTime = new Date(now);
-    refreshTime.setHours(hours, minutes, seconds, 0);
+    refreshTime.setHours(hours, minutes, seconds, milliseconds);
 
     // If the scheduled time is earlier than now, assume it's for tomorrow.
     if (refreshTime < now) {
@@ -69,16 +70,26 @@ function startNotificationLoop(refreshTime) {
 
     const update = () => {
         const now = new Date();
-        let message = `Auto-refresh set for ${refreshTime.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' })}`;
+        
+        const rtMsStr = refreshTime.getMilliseconds().toString().padStart(3, '0');
+        const rtTimeStr = refreshTime.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+        const rtStr = rtTimeStr.match(/ (AM|PM)$/i) ? rtTimeStr.replace(/ (AM|PM)$/i, `.${rtMsStr} $1`) : `${rtTimeStr}.${rtMsStr}`;
+
+        let message = `Auto-refresh set for ${rtStr}`;
         if (refreshTime.getDate() !== now.getDate()) {
             message += " (Tomorrow)";
         }
-        message += ` | Current Time: ${now.toLocaleTimeString()}`;
+
+        const msStr = now.getMilliseconds().toString().padStart(3, '0');
+        const timeStr = now.toLocaleTimeString();
+        const nowStr = timeStr.match(/ (AM|PM)$/i) ? timeStr.replace(/ (AM|PM)$/i, `.${msStr} $1`) : `${timeStr}.${msStr}`;
+
+        message += ` | Current Time: ${nowStr}`;
         showNotification(message);
     };
 
     update(); // Initial call
-    notificationInterval = setInterval(update, 1000);
+    notificationInterval = setInterval(update, 50);
 }
 
 function showNotification(message) {
