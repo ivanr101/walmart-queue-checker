@@ -65,4 +65,4 @@ Since this extension is manually installed, follow these steps to update it:
 
 ## Community
 
-Created by IvanRamii! Join the [Pokemon Restock Discord](https://discord.gg/j6uGVNMKWn) for accurate restock alerts and community support!
+Created by IvanRamii! Join the [Pokemon Restock Discord](https://discord.gg/YgTFyEQxug) for accurate restock alerts and community support!
